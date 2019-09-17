@@ -1,0 +1,23 @@
+image: python:3.6.5
+
+pipelines:
+  default:
+    - step:
+        name: Build and run test
+        script:
+          - pip install virtualenv
+          - virtualenv pyqalxapi_env
+          - pip install -r requirements.txt
+          - pip install pytest-cov
+          - py.test --cov=pyqalxapi test/
+
+  branches:
+    master:
+      - step:
+          name: Build branch and run tests
+          script:
+            - pip install virtualenv
+            - virtualenv pyqalxapi_env
+            - pip install -r requirements.txt
+            - pip install pytest-cov
+            - py.test --cov=pyqalxapi test/
